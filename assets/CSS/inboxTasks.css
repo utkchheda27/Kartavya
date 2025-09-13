@@ -1,0 +1,33 @@
+.tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Optional: spacing between tasks */
+}
+
+.task-individual {
+    display: flex;
+    /* Make task + icons appear in a row */
+    justify-content: space-between;
+    /* Push them apart */
+    align-items: center;
+    /* Align vertically */
+    padding: 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.task-individual:hover {
+    background-color: #eaeaea;
+}
+
+.hover-content {
+    display: flex;
+    gap: 10px;
+}
+
+.addTask{
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}

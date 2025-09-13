@@ -1,0 +1,25 @@
+<div id="taskModal" class="add-task-modal">
+    <div class="modal-content shadow">
+        <form id="taskForm" action="/tasks/add" method="POST">
+            <input type="text" class="task-title" name="description"
+                placeholder="e.g. Submit essay on AI by Thursday p1" required />
+
+            <textarea class="task-details" name="details" placeholder="Description (optional)"></textarea>
+
+            <div class="task-options">
+                <input type="date" name="completionDate" />
+                <select name="priority">
+                    <option value="1">Priority 1</option>
+                    <option value="2">Priority 2</option>
+                    <option value="3">Priority 3</option>
+                    <option value="3" selected>Priority 4</option>
+                </select>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" id="closeModalBtn" class="cancel-btn">Cancel</button>
+                <button type="submit" class="submit-btn">Add task</button>
+            </div>
+        </form>
+    </div>
+</div>

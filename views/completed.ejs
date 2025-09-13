@@ -1,0 +1,28 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/inbox.css">
+    <title>Completed</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <%- include('partials/sidebar')%>
+        </div>
+        <div class="main">
+            <div class="content">
+                <div class="heading">
+                    <h1>Activity: All Projects</h1>
+                </div>
+                <div class="tasks">
+                    <%- include('inboxTasks')%>
+                        <div class="addTask">
+                            <i class="bi bi-plus"></i>
+                            <div class="add-task-text">Add Task</div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
