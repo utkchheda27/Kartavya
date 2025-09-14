@@ -29,3 +29,16 @@ window.addEventListener("click", (event) => {
     modal.style.display = "none";
   }
 });
+
+document.querySelector(".profile-img").addEventListener("click", function (e) {
+  document.getElementById("accountModal").style.display = "flex";
+});
+document
+  .getElementById("closeAccountModal")
+  .addEventListener("click", function () {
+    document.getElementById("accountModal").style.display = "none";
+  });
+window.addEventListener("click", function (e) {
+  if (e.target.id === "accountModal")
+    document.getElementById("accountModal").style.display = "none";
+});

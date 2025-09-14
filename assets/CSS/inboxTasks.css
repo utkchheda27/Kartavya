@@ -2,16 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* Optional: spacing between tasks */
+    /* spacing between tasks */
 }
 
 .task-individual {
     display: flex;
-    /* Make task + icons appear in a row */
     justify-content: space-between;
-    /* Push them apart */
+    /* task-info left, icons right */
     align-items: center;
-    /* Align vertically */
     padding: 10px;
     border-radius: 6px;
     transition: background-color 0.3s;
@@ -21,13 +19,54 @@
     background-color: #eaeaea;
 }
 
+/* Left side: description + details */
+.task-info {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    /* take only 75% of the row */
+    overflow: hidden;
+    /* prevent text from spilling */
+}
+
+/* Title (main description) */
+.task {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Details (subtext) */
+.task-details {
+    font-size: 0.9rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Initially hide hover-content */
 .hover-content {
     display: flex;
     gap: 10px;
+    flex-shrink: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
 }
 
-.addTask{
+/* Show when either task-info OR hover-content is hovered */
+.task-individual:hover .hover-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Add task input row */
+.addTask {
     display: flex;
     flex-direction: row;
     padding: 8px;
+    gap: 8px;
 }

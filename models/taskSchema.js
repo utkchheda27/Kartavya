@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
   description: String,
+  details: String,
   priority: Number,
   completionDate: Date,
   isCompleted: {

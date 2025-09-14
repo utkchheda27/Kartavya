@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="CSS/addTask.css">
     <link rel="stylesheet" href="CSS/sidebar.css">
 </head>
 
@@ -51,7 +52,7 @@
                     Completed
                 </a>
             </div>
-            <div class="nav-item" class="nav-link" id="moreBtn" style="cursor: pointer;">
+            <div class="nav-item" class="nav-link" id="moreBtn">
                 <i class="bi bi-three-dots"></i>
                 More
             </div>
@@ -77,6 +78,7 @@
             </div>
         </div>
     </div>
-    <%- include('../modals/addTask') %>
-        <script src="JS/sidebar.js"></script>
+    <%- include('../modals/more') %>
+        <%- include('../modals/addTask') %>
+            <script src="JS/sidebar.js"></script>
 </body>

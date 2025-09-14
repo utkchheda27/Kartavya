@@ -1,0 +1,20 @@
+.navigation .nav-link#addTaskBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #e63946;
+    color: #fff !important;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.navigation .nav-link#addTaskBtn:hover {
+    background-color: #d62839;
+    transform: translateY(-1px);
+}

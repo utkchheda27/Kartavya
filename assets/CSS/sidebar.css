@@ -97,17 +97,48 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.modal-content button,
+.cancel-btn,
+.submit-btn {
+    border: none;
+    box-shadow: none;
+}
+
+/* Cancel button - subtle gray */
+.cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+    border-radius: 6px;
+}
+
+.cancel-btn:hover {
+    background-color: #d6d6d6;
+    transform: translateY(-1px);
+}
+
+/* Add Task button - primary accent */
+.submit-btn {
+    background-color: #e63946;
+    /* red accent */
+    color: #fff;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.submit-btn:hover {
+    background-color: #d62839;
+    transform: translateY(-1px);
+}
+
 /* Close button */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #333;
 }
 
 .close:hover {
-    color: #000;
+    background-color: #d6d6d6;
+    transform: translateY(-1px);
 }
 
 /* Form styles */
