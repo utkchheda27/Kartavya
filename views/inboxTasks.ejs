@@ -8,29 +8,30 @@
 <body>
     <% tasks.forEach((task, index)=> { %>
         <div class="task-individual">
+            <button class="circle-checkbox <%= task.completed ? 'completed' : '' %>" aria-label="Mark as completed">
+                <i class="bi <%= task.completed ? 'bi-check-lg' : '' %>"></i>
+            </button>
             <div class="task-info">
-                <div class="task">
-                    <%= index + 1 %>. <%= task.description %>
-                </div>
-
+                <div class="task"><strong>
+                        <%= task.description %>
+                    </strong></div>
                 <% if (task.details) { %>
-                    <div class="task-details">
+                    <span class="task-details">
                         <%= task.details %>
-                    </div>
+                    </span>
                     <% } %>
             </div>
-
             <div class="hover-content">
-                <i class="bi bi-pencil-square"></i>
-                <i class="bi bi-calendar calendarIcon" style="cursor: pointer;"></i>
-                <input type="text" class="calendarInput" style="display:none;" /><!-- Hidden input for Flatpickr -->
-                <i class="bi bi-chat-left"></i>
-                <i class="bi bi-three-dots"></i>
+                <i class="bi bi-pencil-square" title="Edit"></i>
+                <i class="bi bi-calendar calendarIcon" title="Set Date"></i>
+                <i class="bi bi-chat-left" title="Comment"></i>
+                <i class="bi bi-three-dots" title="More"></i>
             </div>
-
         </div>
+
         <% }) %>
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
             <script src="/JS/calender-hover.js"></script>
             <script src="/JS/inbox.js"></script>
+            <script src="/JS/inboxTasks.js"></script>
 </body>

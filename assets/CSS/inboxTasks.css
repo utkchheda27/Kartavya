@@ -1,72 +1,103 @@
 .tasks {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    /* spacing between tasks */
+    gap: 18px;
+    /* Increased for clarity */
 }
 
 .task-individual {
     display: flex;
-    justify-content: space-between;
-    /* task-info left, icons right */
     align-items: center;
-    padding: 10px;
-    border-radius: 6px;
-    transition: background-color 0.3s;
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s, background 0.3s;
+    position: relative;
 }
 
 .task-individual:hover {
-    background-color: #eaeaea;
+    background-color: #f5ecec;
+    box-shadow: 0 4px 24px rgba(230, 57, 70, 0.12);
 }
 
-/* Left side: description + details */
-.task-info {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    /* take only 75% of the row */
-    overflow: hidden;
-    /* prevent text from spilling */
-}
-
-/* Title (main description) */
-.task {
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Details (subtext) */
-.task-details {
-    font-size: 0.9rem;
-    color: #666;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Initially hide hover-content */
 .hover-content {
     display: flex;
-    gap: 10px;
-    flex-shrink: 0;
+    flex-direction: row;
+    /* Change from column to row */
+    gap: 14px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease;
+    position: absolute;
+    right: 14px;
+    /* or left: 14px; as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    transition: opacity 0.25s;
+    align-items: center;
+    /* vertical align fix */
 }
 
-/* Show when either task-info OR hover-content is hovered */
 .task-individual:hover .hover-content {
     opacity: 1;
     visibility: visible;
 }
 
+.task-info {
+    margin-left: 20px;
+    /* reduce margin on left since icons moved right */
+    margin-right: 60px;
+    /* add margin on right for space for icons */
+    width: calc(100% - 80px);
+    /* adjust width to keep layout consistent */
+}
 
-/* Add task input row */
-.addTask {
+.task {
+    font-size: 1.04rem;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.task-details {
+    font-size: 0.98rem;
+    color: #888;
+    margin-left: 2px;
+    white-space: normal;
+    overflow: visible;
+}
+
+.circle-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #bbb;
+    border-radius: 50%;
+    background: #fff;
     display: flex;
-    flex-direction: row;
-    padding: 8px;
-    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+    margin-right: 12px;
+    position: relative;
+}
+
+.circle-checkbox i {
+    font-size: 1.1rem;
+    color: #e63946;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.circle-checkbox:hover,
+.circle-checkbox.completed {
+    background: #e63946;
+    border-color: #e63946;
+}
+
+.circle-checkbox:hover i,
+.circle-checkbox.completed i {
+    opacity: 1;
+    color: #fff;
 }

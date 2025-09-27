@@ -1,106 +1,56 @@
-.layout{
+.layout {
     display: flex;
-    height: auto;
-
-    .sidebar{
-        height: 100vh;
-        width: 12vw;
-        background-color: #FCFAF8;
-    }
-
-    .main{
-        height: 100vh;
-        width: 80vw;
-
-        display: flex;
-        justify-content: center;
-        .content{
-            display: flex;
-            flex-direction:column;
-            height: 100vh;
-            justify-content:flex-start;
-            width: 60%;
-            background-color: rgb(240, 229, 229);
-            .heading{
-                margin: 5%;
-                margin-bottom: 2%;
-            }
-            .tasks{
-                margin-left:5%;
-                .addTask {
-                        display: flex;
-                        align-items: center;
-                        /* vertical center */
-                        gap: 6px;
-                        /* space between + and text */
-                        cursor: pointer;
-                    }
-                
-                    .addTask i {
-                        font-size: 1.2rem;
-                        font-weight:lighter;
-                        line-height: 1;
-                        /* avoid vertical offset */
-
-                        .flatpickr-calendar {
-                                z-index: 9999;
-                            }
-                    }
-                
-            }
-        }
-    }
+    min-height: 100vh;
+    background-color: #faf7f7;
 }
 
+.sidebar {
+    height: 100vh;
+    width: 13vw;
+    background-color: #FCFAF8;
+    border-right: 2px solid #ebebeb;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, #f5ecec 0, #f9f5f4 100%);
+}
+
+.content {
+    width: 60vw;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 24px rgba(0, 0, 0, .07);
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    margin: 22px 0 10px 20px;
+    font-size: 1.32rem;
+    font-weight: 700;
+    color: #e63946;
+}
+
+/* Add Task Form Enhanced */
 .add-task-form {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    /* same width as tasks */
-    margin-left: 2%;
-    /* align with task list */
-}
-
-.form-actions {
-    display: flex;
-    gap: 15px;
-    /* more spacing between buttons */
-    justify-content: flex-end;
-    margin-top: 12px;
+    width: 98% !important;
+    padding: 18px;
+    border-radius: 11px;
+    background: #faf7f7;
+    border: 1.5px solid #e63946;
+    margin-left: 1vw;
+    box-shadow: 0 2px 10px rgba(230, 57, 70, .10);
 }
 
 .form-actions button {
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
-
-/* Cancel button - subtle gray */
-.form-actions .cancel-btn {
-    background-color: #e0e0e0;
-    color: #333;
-}
-
-.form-actions .cancel-btn:hover {
-    background-color: #d6d6d6;
-    transform: translateY(-1px);
-}
-
-/* Add Task button - primary accent */
-.form-actions .submit-btn {
-    background-color: #e63946;
-    /* red accent */
-    color: #fff;
-    font-weight: 500;
-}
-
-.form-actions .submit-btn:hover {
-    background-color: #d62839;
-    transform: translateY(-1px);
+    padding: 9px 22px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 4px;
 }
