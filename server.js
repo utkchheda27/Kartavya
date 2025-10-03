@@ -27,12 +27,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/inbox", async (req, res) => {
-  const tasks = await Task.find({ isCompleted: false });
+  const tasks = await Task.find({ isCompleted: false }).sort({ order: 1 });
   res.render("inbox.ejs", { tasks });
 });
 
 app.get("/completed", async (req, res) => {
-  const tasks = await Task.find({ isCompleted: true });
+  const tasks = await Task.find({ isCompleted: true }).sort({ order: 1 });
   res.render("completed.ejs", { tasks });
 });
 
@@ -63,6 +63,47 @@ app.post("/tasks/add", async (req, res) => {
     res.status(500).json({ error: "Failed to add task" });
   }
 });
+
+app.patch("/tasks/:id/complete", async (req, res) => {
+  try {
+    const { id } = req.params; // Update the task's isCompleted field to true and return the updated document
+    const updatedTask = await Task.findByIdAndUpdate(
+      id,
+      { isCompleted: true },
+      { new: true }
+    );
+    if (!updatedTask) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+    res.json(updatedTask);
+  } catch (err) {
+    console.log("Update error")
+    console.error(err);
+    res.status(500).json({ error: "Failed to complete task" });
+  }
+});
+
+app.post("/tasks/reorder", async (req, res) => {
+  try {
+    const { ids } = req.body; // expecting an array of task _id strings in new order
+    if (!Array.isArray(ids)) {
+      return res.status(400).json({ error: "Invalid request data" });
+    }
+
+    // Update each task's order field according to its index in the array
+    for (let i = 0; i < ids.length; i++) {
+      await Task.findByIdAndUpdate(ids[i], { order: i });
+    }
+
+    res.json({ message: "Order updated successfully" });
+  } catch (err) {
+    console.error("Failed to update task order:", err);
+    res.status(500).json({ error: "Failed to update order" });
+  }
+});
+
+
+
 
 app.listen(port, () => {
   console.log(`Listening to port ${port}`);

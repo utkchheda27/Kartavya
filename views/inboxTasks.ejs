@@ -3,35 +3,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_red.css">
     <link rel="stylesheet" href="CSS/inboxTasks.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <% tasks.forEach((task, index)=> { %>
-        <div class="task-individual">
-            <button class="circle-checkbox <%= task.completed ? 'completed' : '' %>" aria-label="Mark as completed">
-                <i class="bi <%= task.completed ? 'bi-check-lg' : '' %>"></i>
-            </button>
-            <div class="task-info">
-                <div class="task"><strong>
-                        <%= task.description %>
-                    </strong></div>
-                <% if (task.details) { %>
-                    <span class="task-details">
-                        <%= task.details %>
-                    </span>
-                    <% } %>
+    <div class="tasks" id="tasks-list">
+        <% tasks.forEach((task, index)=> { %>
+            <div class="task-individual" data-id="<%= task._id %>">
+                <button class="circle-checkbox <%= task.isCompleted ? 'completed' : '' %>"
+                    aria-label="Mark as completed" data-task-id="<%= task._id %>">
+                    <i class="bi <%= task.isCompleted ? 'bi-check-lg' : '' %>"></i>
+                </button>
+                <div class="task-info">
+                    <div class="task"><strong>
+                            <%= task.description %>
+                        </strong></div>
+                    <% if (task.details) { %>
+                        <span class="task-details">
+                            <%= task.details %>
+                        </span>
+                        <% } %>
+                            <% if (task.completionDate) { %>
+                                <div class="task-date">
+                                    <i class="bi bi-calendar"></i>
+                                    <%= new Date(task.completionDate).toLocaleDateString('en-GB', { day: '2-digit' ,
+                                        month: 'short' }) %>
+                                </div>
+                                <% } %>
+                </div>
+                <div class="hover-content">
+                    <i class="bi bi-pencil-square" title="Edit"></i>
+                    <i class="bi bi-calendar calendarIcon" title="Set Date"></i>
+                    <i class="bi bi-chat-left" title="Comment"></i>
+                    <i class="bi bi-three-dots" title="More"></i>
+                </div>
             </div>
-            <div class="hover-content">
-                <i class="bi bi-pencil-square" title="Edit"></i>
-                <i class="bi bi-calendar calendarIcon" title="Set Date"></i>
-                <i class="bi bi-chat-left" title="Comment"></i>
-                <i class="bi bi-three-dots" title="More"></i>
-            </div>
-        </div>
+            <% }) %>
+    </div>
 
-        <% }) %>
-            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-            <script src="/JS/calender-hover.js"></script>
-            <script src="/JS/inbox.js"></script>
-            <script src="/JS/inboxTasks.js"></script>
+    <div class="hover-content">
+        <!-- Hover Icons -->
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="/JS/calender-hover.js"></script>
+        <script src="/JS/inbox.js"></script>
+        <script src="/JS/inboxTasks.js"></script>
 </body>

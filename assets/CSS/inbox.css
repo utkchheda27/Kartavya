@@ -54,3 +54,31 @@
     font-weight: 600;
     margin: 0 4px;
 }
+
+.addTask {
+    display: flex;
+    align-items: center;
+    /* Add desired space from the left or right */
+    margin-left: 24px;
+    /* for left margin */
+    margin-right: 24px;
+    /* for right margin (use as needed) */
+    margin-top: 18px;
+    /* optional: to add space above */
+    margin-bottom: 12px;
+    /* optional: to add space below */
+    padding: 8px 16px;
+    /* optional: make button larger and clickable */
+    border-radius: 8px;
+    /* optional: add rounded corners */
+    background: #fff;
+    /* optional: button background */
+    box-shadow: 0 2px 6px rgba(80, 80, 80, 0.05);
+    /* optional: subtle shadow */
+    cursor: pointer;
+}
+
+.addTask .bi {
+    margin-right: 8px;
+    /* space between icon and text */
+}

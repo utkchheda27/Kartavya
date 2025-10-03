@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    /* Increased for clarity */
 }
 
 .task-individual {
@@ -12,8 +11,9 @@
     border-radius: 10px;
     padding: 16px 20px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.3s, background 0.3s;
+    transition: box-shadow 0.3s, background 0.3s, opacity 0.4s, transform 0.4s;
     position: relative;
+    cursor: grab;
 }
 
 .task-individual:hover {
@@ -21,22 +21,27 @@
     box-shadow: 0 4px 24px rgba(230, 57, 70, 0.12);
 }
 
+.sortable-ghost {
+    opacity: 0.6;
+    background: #e63946;
+    color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    cursor: grabbing;
+}
+
 .hover-content {
     display: flex;
     flex-direction: row;
-    /* Change from column to row */
     gap: 14px;
     opacity: 0;
     visibility: hidden;
     position: absolute;
     right: 14px;
-    /* or left: 14px; as needed */
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
     transition: opacity 0.25s;
     align-items: center;
-    /* vertical align fix */
 }
 
 .task-individual:hover .hover-content {
@@ -46,11 +51,8 @@
 
 .task-info {
     margin-left: 20px;
-    /* reduce margin on left since icons moved right */
     margin-right: 60px;
-    /* add margin on right for space for icons */
     width: calc(100% - 80px);
-    /* adjust width to keep layout consistent */
 }
 
 .task {
@@ -90,7 +92,10 @@
     transition: opacity 0.2s;
 }
 
-.circle-checkbox:hover,
+.circle-checkbox:hover {
+    border-color: #e63946;
+}
+
 .circle-checkbox.completed {
     background: #e63946;
     border-color: #e63946;
@@ -100,4 +105,19 @@
 .circle-checkbox.completed i {
     opacity: 1;
     color: #fff;
+}
+
+.task-date {
+    margin-top: 4px;
+    color: #d9534f;
+    font-size: 0.97rem;
+    display: block;
+}
+
+.edit-input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
