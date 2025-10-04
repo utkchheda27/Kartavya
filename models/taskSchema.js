@@ -6,6 +6,7 @@ const taskSchema = new Schema({
   details: String,
   priority: Number,
   completionDate: Date,
+  taskCompletedDate: Date,
   isCompleted: {
     type: Boolean,
     default: false,
