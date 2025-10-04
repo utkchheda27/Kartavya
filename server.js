@@ -2,10 +2,18 @@ const express = require("express");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
+const expressSession = require("express-session");
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
+
 const Task = require("./models/taskSchema");
+const User = require("./models/userSchema");
+
+const { initializingPassport, isAuthenticated } = require("./passportConfig");
+
+initializingPassport(passport);
 
 mongoose.connect("mongodb://localhost:27017/Kartavya");
 
@@ -21,6 +29,73 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(bodyParser.json()); //Middleware
 app.use(express.urlencoded({ extended: true }));
+
+//passport js middleware
+app.use(
+  expressSession({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 30 * 7 * 24 * 1000 * 60 * 60,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err); // Pass the error to the next middleware
+    }
+    res.redirect("/login");
+  });
+});
+
+//don't mix up authenticating and saving a new user to db
+//use passport logic only for authentication
+app.post("/register", async (req, res, next) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (user) {
+      return res.send("User already exists");
+    }
+
+    const newUser = new User({
+      username: req.body.username,
+      name: req.body.name,
+      password: req.body.password,
+    });
+    await newUser.save();
+
+    // After successful registration, log the user in
+    req.login(newUser, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/");
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    successRedirect: "/",
+  })
+);
 
 app.get("/", (req, res) => {
   res.render("home.ejs");
@@ -70,7 +145,6 @@ app.get("/upcoming", async (req, res) => {
 
   res.render("upcoming.ejs", { upcomingTasks });
 });
-
 
 app.post("/tasks/add", async (req, res) => {
   try {

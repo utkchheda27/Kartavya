@@ -1,0 +1,83 @@
+body {
+    font-family: 'Work Sans', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#title {
+    font-size: 2.5rem;
+    color: #062e3f;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+}
+
+.todo-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    background-color: #062e3f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+}
+
+.todo-btn:hover {
+    background-color: #054052;
+}
+
+p {
+    margin-top: 20px;
+    color: #062e3f;
+}
+
+a {
+    color: #062e3f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.version {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+.demo.version-section {
+    position: relative;
+}
