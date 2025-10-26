@@ -101,17 +101,28 @@ app.get("/", (req, res) => {
   res.render("home.ejs");
 });
 
-app.get("/inbox", async (req, res) => {
-  const tasks = await Task.find({ isCompleted: false }).sort({ order: 1 });
-  res.render("inbox.ejs", { tasks });
+app.get("/inbox", isAuthenticated, async (req, res, next) => {
+  try {
+    const tasks = await Task.find({
+      isCompleted: false,
+      User: req.user._id,
+    }).sort({ order: 1 });
+    const current_user = req.user;
+    res.render("inbox.ejs", { tasks, current_user });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get("/completed", async (req, res) => {
-  const tasks = await Task.find({ isCompleted: true }).sort({ order: 1 });
-  res.render("completed.ejs", { tasks });
+app.get("/completed", isAuthenticated, async (req, res) => {
+  const tasks = await Task.find({ isCompleted: true, User: req.user._id }).sort(
+    { order: 1 }
+  );
+  const current_user = req.user;
+  res.render("completed.ejs", { tasks, current_user });
 });
 
-app.get("/today", async (req, res) => {
+app.get("/today", isAuthenticated, async (req, res) => {
   // Local midnight-to-midnight boundaries for "today"
   const now = new Date();
   const start = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // Local midnight
@@ -121,32 +132,36 @@ app.get("/today", async (req, res) => {
   // Tasks due today
   const todayTasks = await Task.find({
     isCompleted: false,
+    User: req.user._id,
     completionDate: { $gte: start, $lt: end },
   }).sort({ order: 1 });
 
   // Tasks overdue (due date before today, not completed)
   const overdueTasks = await Task.find({
     isCompleted: false,
+    User: req.user._id,
     completionDate: { $lt: start },
   }).sort({ order: 1 });
-
-  res.render("today.ejs", { todayTasks, overdueTasks });
+  const current_user = req.user;
+  res.render("today.ejs", { todayTasks, overdueTasks, current_user });
 });
 
-app.get("/upcoming", async (req, res) => {
+app.get("/upcoming", isAuthenticated, async (req, res) => {
   const now = new Date();
   const start = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); // Tomorrow's midnight
   const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 8); // Midnight 7 days after tomorrow
 
   const upcomingTasks = await Task.find({
     isCompleted: false,
+    User: req.user._id,
     completionDate: { $gte: start, $lt: end },
   }).sort({ order: 1 });
 
-  res.render("upcoming.ejs", { upcomingTasks });
+  const current_user = req.user;
+  res.render("upcoming.ejs", { upcomingTasks, current_user });
 });
 
-app.post("/tasks/add", async (req, res) => {
+app.post("/tasks/add", isAuthenticated, async (req, res) => {
   try {
     let { description, details, completionDate, priority } = req.body;
     if (!description || description.trim() === "") {
@@ -165,6 +180,7 @@ app.post("/tasks/add", async (req, res) => {
       completionDate,
       priority,
       isCompleted: false,
+      User: req.user._id,
     });
     await newTask.save();
     res.redirect("/inbox");
@@ -174,13 +190,14 @@ app.post("/tasks/add", async (req, res) => {
   }
 });
 
-app.patch("/tasks/:id/complete", async (req, res) => {
+app.patch("/tasks/:id/complete", isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedTask = await Task.findByIdAndUpdate(
       id,
       {
         isCompleted: true,
+        User: req.user._id,
         taskCompletedDate: new Date(),
       },
       { new: true }
@@ -196,7 +213,7 @@ app.patch("/tasks/:id/complete", async (req, res) => {
   }
 });
 
-app.post("/tasks/reorder", async (req, res) => {
+app.post("/tasks/reorder", isAuthenticated, async (req, res) => {
   try {
     const { ids } = req.body; // expecting an array of task _id strings in new order
     if (!Array.isArray(ids)) {
@@ -207,8 +224,6 @@ app.post("/tasks/reorder", async (req, res) => {
     for (let i = 0; i < ids.length; i++) {
       await Task.findByIdAndUpdate(ids[i], { order: i });
     }
-
-    res.json({ message: "Order updated successfully" });
   } catch (err) {
     console.error("Failed to update task order:", err);
     res.status(500).json({ error: "Failed to update order" });
