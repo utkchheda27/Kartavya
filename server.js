@@ -1,6 +1,9 @@
 const express = require("express");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const expressSession = require("express-session");
@@ -63,17 +66,21 @@ app.get("/logout", (req, res, next) => {
 
 //don't mix up authenticating and saving a new user to db
 //use passport logic only for authentication
-app.post("/register", async (req, res, next) => {
+app.post("/register",upload.single("image"), async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     if (user) {
       return res.send("User already exists");
     }
+    let defaultPic=fs.readFileSync("assets/images/default.jpg");
 
     const newUser = new User({
       username: req.body.username,
       name: req.body.name,
       password: req.body.password,
+      profilePic: req.file
+        ? { data: req.file.buffer, contentType: req.file.mimetype }
+        : { data: defaultPic, contentType: "image/jpeg" },
     });
     await newUser.save();
 

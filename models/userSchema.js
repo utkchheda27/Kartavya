@@ -16,6 +16,10 @@ const userSchema = new Schema({
       ref: "Task",
     },
   ],
+  profilePic: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 userSchema.plugin(passportLocalMongoose); // This manages password field and authentication

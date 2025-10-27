@@ -27,10 +27,11 @@
         </div>
 
         <div id="form">
-            <form action="/register" method="POST">
+            <form action="/register" method="POST" enctype="multipart/form-data">
                 <input class="todo-input" name="name" type="text" placeholder="Name" required>
                 <input class="todo-input" name="username" type="text" placeholder="Email" required>
                 <input class="todo-input" name="password" type="password" placeholder="Password" required>
+                <input class="todo-input" type="file" name="image" accept="image/*">
                 <button class="todo-btn" type="submit">Register</button>
             </form>
             <p>Already have an account? <a href="/login">Login here</a>.</p>

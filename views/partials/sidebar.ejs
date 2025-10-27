@@ -7,7 +7,14 @@
 <body>
     <div class="sidebar-content">
         <div class="user-options">
-            <div class="user-options-element profile-img"><img src="images/vader.jpg" alt="" class="user-img"></div>
+            <div class="user-options-element profile-img">
+                <% if (current_user.profilePic && current_user.profilePic.data) { %>
+                    <img src="data:<%= current_user.profilePic.contentType %>;base64,<%= current_user.profilePic.data.toString('base64') %>"
+                        alt="Profile Image" class="user-img">
+                    <% } else { %>
+                        <img src="/images/default.jpg" alt="Default Profile" class="user-img">
+                        <% } %>
+            </div>
             <div class="user-options-element profile-name"><%=current_user.name%></div>
             <div class="user-options-element profile-name">
                 <i class="bi bi-bell"></i>
