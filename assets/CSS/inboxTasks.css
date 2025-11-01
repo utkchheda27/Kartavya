@@ -8,25 +8,34 @@
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 0;
     padding: 16px 20px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: none;
     transition: box-shadow 0.3s, background 0.3s, opacity 0.4s, transform 0.4s;
     position: relative;
     cursor: grab;
 }
 
 .task-individual:hover {
-    background-color: #f5ecec;
-    box-shadow: 0 4px 24px rgba(230, 57, 70, 0.12);
+    background-color: #fff;
+    box-shadow: none;
 }
 
 .sortable-ghost {
     opacity: 0.6;
-    background: #e63946;
-    color: white;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    color: #222;
+    box-shadow: none;
     cursor: grabbing;
+    transition: background 0.25s ease, opacity 0.2s ease;
+}
+
+.sortable-chosen,
+.dragging {
+    transition: transform 0.25s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform: scale(1.06);
+    opacity: 0.85;
+    z-index: 100;
 }
 
 .hover-content {
@@ -120,4 +129,34 @@
     padding: 4px 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+/* Apply dark mode for entire page */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Override components globally */
+body.dark-mode header,
+body.dark-mode main,
+body.dark-mode footer,
+body.dark-mode .sidebar {
+    background-color: #1e1e1e;
+    color: #ddd;
+}
+
+/* Example for links in dark mode */
+body.dark-mode a {
+    color: #90caf9;
+}
+
+/* Adjust other UI elements accordingly in dark mode */
+body.dark-mode button,
+body.dark-mode input,
+body.dark-mode textarea {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
 }

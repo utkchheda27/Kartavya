@@ -1,64 +1,103 @@
-.sidebar-content{
+.sidebar-content {
     position: relative;
     display: flex;
     flex-direction: column;
     margin: 10%;
-
-    .user-options{
-        display: flex;
-        justify-content: space-around;
-
-        .user-img{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-left: -20%;
-        }
-        align-items: center;
-    }
-
-    .navigation{
-        display: flex;
-        flex-direction: column;
-        margin-top: 20%;
-
-        .nav-item{
-            margin-top: 5%;
-            margin-bottom: 5%;
-
-            .nav-link {
-                    text-decoration: none;
-                    /* Remove underline */
-                    color: inherit;
-                    /* Keep icon/text color consistent */
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                }
-            
-                .nav-link:focus,
-                .nav-link:active {
-                    outline: none;
-                    box-shadow: none;
-                }
-        }
-    }
-
-    .other-projects{
-        margin-top: 20%;
-        .project-item-header{
-            margin-bottom: 10%;
-            font-weight: bolder;
-        }
-    }
-
-    .others{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        flex-grow: 1;
-    }
+    overflow: visible;
+    height: 100%;
+    /* Added: ensures full height for flexbox */
+    min-height: calc(100vh - 20%);
+    /* Added: accounting for top/bottom margin */
 }
+
+
+.user-options {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.user-options-element {
+    display: flex;
+    align-items: center;
+}
+
+
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.profile-name {
+    font-size: 14px;
+}
+
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+}
+
+
+.nav-item {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.nav-link:focus,
+.nav-link:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+.other-projects {
+    margin-top: 20%;
+    margin-bottom: 20px;
+    /* Added: spacing after project section */
+}
+
+
+.project-item-header {
+    margin-bottom: 10%;
+    font-weight: bolder;
+}
+
+.project-item {
+    margin-bottom: 8px;
+    /* Added: spacing between project items */
+}
+
+.project-item:last-child {
+    margin-bottom: 0;
+    /* Added: removes extra margin from last item */
+}
+
+
+.others {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    min-height: 100px;
+    /* Added: ensures minimum space for the section */
+}
+
 
 /* Modal container (full screen overlay) */
 .add-task-modal {
@@ -71,8 +110,8 @@
     height: 100vh;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    /* dark background */
 }
+
 
 /* Modal container (full screen overlay) */
 .more-modal {
@@ -86,6 +125,7 @@
     border-radius: 8px;
 }
 
+
 /* Modal content box */
 .modal-content {
     background-color: #fff;
@@ -97,12 +137,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+
 .modal-content button,
 .cancel-btn,
 .submit-btn {
     border: none;
     box-shadow: none;
 }
+
 
 /* Cancel button - subtle gray */
 .cancel-btn {
@@ -111,24 +153,27 @@
     border-radius: 6px;
 }
 
+
 .cancel-btn:hover {
     background-color: #d6d6d6;
     transform: translateY(-1px);
 }
 
+
 /* Add Task button - primary accent */
 .submit-btn {
     background-color: #e63946;
-    /* red accent */
     color: #fff;
     font-weight: 500;
     border-radius: 6px;
 }
 
+
 .submit-btn:hover {
     background-color: #d62839;
     transform: translateY(-1px);
 }
+
 
 /* Close button */
 .close {
@@ -136,10 +181,12 @@
     color: #333;
 }
 
+
 .close:hover {
     background-color: #d6d6d6;
     transform: translateY(-1px);
 }
+
 
 /* Form styles */
 #taskForm {
@@ -147,10 +194,150 @@
     flex-direction: column;
 }
 
+
 #taskForm input,
 #taskForm textarea,
 #taskForm button {
     margin-top: 10px;
     padding: 8px;
     font-size: 14px;
+}
+
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 52px;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+
+#logout-btn {
+    background: none;
+    border: none;
+    padding: 3px 16px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+
+.profile-img {
+    position: relative;
+}
+
+
+.profile-img:hover .profile-dropdown,
+.profile-dropdown:hover {
+    display: block;
+}
+
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.08);
+    padding: 0.1em 0;
+    z-index: 1000;
+    min-width: 5em;
+    border-radius: 0.25em;
+    white-space: nowrap;
+}
+
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+
+.sidebar {
+    background-color: #FCFAF8;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+    height: 100vh;
+    /* Added: makes sidebar full viewport height */
+    display: flex;
+    /* Added: enables flex container */
+    flex-direction: column;
+    /* Added: stacks content vertically */
+}
+
+
+body.dark-mode .sidebar {
+    background-color: #1e1e1e;
+    color: #ddd;
+}
+
+
+/* Dark mode toggle switch styling */
+.dark-mode-toggle-container {
+    margin-top: auto;
+    /* Keeps this at bottom */
+    margin-bottom: 20px;
+    /* Added: spacing from bottom edge */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 24px;
+}
+
+
+.switch input {
+    display: none;
+}
+
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: 0.4s;
+}
+
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+
+input:checked+.slider:before {
+    transform: translateX(21px);
 }

@@ -7,15 +7,23 @@
 <body>
     <div class="sidebar-content">
         <div class="user-options">
-            <div class="user-options-element profile-img">
+            <div class="user-options-element profile-img" id="profile-container" style="position: relative;">
                 <% if (current_user.profilePic && current_user.profilePic.data) { %>
                     <img src="data:<%= current_user.profilePic.contentType %>;base64,<%= current_user.profilePic.data.toString('base64') %>"
-                        alt="Profile Image" class="user-img">
+                        alt="Profile Image" class="user-img" id="profile-pic">
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <button id="logout-btn">Logout</button>
+                        </div>
                     <% } else { %>
-                        <img src="/images/default.jpg" alt="Default Profile" class="user-img">
+                        <img src="/images/default.jpg" alt="Default Profile" class="user-img" id="profile-pic">
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <button id="logout-btn">Logout</button>
+                        </div>
                         <% } %>
             </div>
-            <div class="user-options-element profile-name"><%=current_user.name%></div>
+            <div class="user-options-element profile-name">
+                <%=current_user.name%>
+            </div>
             <div class="user-options-element profile-name">
                 <i class="bi bi-bell"></i>
             </div>
@@ -30,7 +38,7 @@
             </div>
 
             <div class="nav-item">
-                <a href="/search" class="nav-link">
+                <a href="/inbox" class="nav-link">
                     <i class="bi bi-search"></i>
                     Search
                 </a>
@@ -83,6 +91,13 @@
                     Help & Resources
                 </div>
             </div>
+        </div>
+        <div class="dark-mode-toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle" />
+                <span class="slider"></span>
+            </label>
+            <span>Dark Mode</span>
         </div>
     </div>
     <%- include('../modals/more') %>

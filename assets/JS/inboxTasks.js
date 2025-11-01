@@ -3,12 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Create Sortable instance
   Sortable.create(el, {
-    animation: 150,
+    animation: 250,
     ghostClass: "sortable-ghost",
+    chosenClass: "sortable-chosen",
+    dragClass: "sortable-drag",
+    swapThreshold: 0.65,
+    onStart: function (evt) {
+      evt.item.classList.add("dragging");
+    },
     onEnd: async function (evt) {
+      evt.item.classList.remove("dragging");
       // Collect ordered task IDs after drag
       const ids = Array.from(el.children).map((div) => div.dataset.id);
-
       try {
         // Send the updated order to the server
         await axios.post("/tasks/reorder", { ids });
@@ -17,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     },
   });
+
 
   // Your existing JS for edit, complete, etc.
 

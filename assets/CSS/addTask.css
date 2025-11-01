@@ -1,3 +1,70 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 13vw;
+    background-color: #FCFAF8;
+    border-right: 2px solid #ebebeb;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    width: 60vw;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    margin: 22px 0 10px 20px;
+    font-size: 1.32rem;
+    font-weight: 700;
+    color: #e63946;
+}
+
+/* Add Task Button */
+.addTask {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 18px;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.addTask:hover {
+    background-color: #fafafa;
+}
+
+.addTask .bi {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.add-task-text {
+    font-size: 1rem;
+    color: #333;
+}
+
 .navigation .nav-link#addTaskBtn {
     display: flex;
     align-items: center;
@@ -6,15 +73,233 @@
     color: #fff !important;
     font-weight: 500;
     padding: 10px 16px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
     margin: 10px 0;
     width: 100%;
     box-sizing: border-box;
+    border: none;
+    box-shadow: 0 2px 8px rgba(230, 57, 70, 0.2);
 }
 
-.navigation .nav-link#addTaskBtn:hover {
+/* Add Task Form (Inline) */
+.add-task-form {
+    width: 98% !important;
+    padding: 24px;
+    border-radius: 0;
+    background: #fff;
+    border: none;
+    margin-left: 1vw;
+    margin-bottom: 16px;
+    box-shadow: none;
+}
+
+.add-task-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Form Input Fields */
+.add-task-form input[type="text"],
+.add-task-form textarea,
+.add-task-form input[type="date"],
+.add-task-form select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.add-task-form input[type="text"]:focus,
+.add-task-form textarea:focus,
+.add-task-form input[type="date"]:focus,
+.add-task-form select:focus {
+    outline: none;
+    border-color: #e63946;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+}
+
+/* Task Title Input */
+.task-title {
+    font-weight: 500;
+}
+
+/* Task Details Textarea - Remove resize handle */
+.task-details {
+    min-height: 80px;
+    resize: none;
+    line-height: 1.5;
+}
+
+/* Placeholder styling */
+.add-task-form input::placeholder,
+.add-task-form textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Task Options Row - Date and Priority in Same Line */
+.task-options {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.task-options input[type="date"],
+.task-options select {
+    flex: 1;
+}
+
+/* Date Input */
+.task-options input[type="date"] {
+    cursor: pointer;
+}
+
+/* Priority Select Dropdown */
+.task-options select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.form-actions button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Cancel Button */
+.cancel-btn {
+    background-color: #f5f5f5;
+    color: #555;
+}
+
+.cancel-btn:hover {
+    background-color: #e8e8e8;
+    transform: translateY(-1px);
+}
+
+.cancel-btn:active {
+    transform: translateY(0);
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: #e63946;
+    color: #fff;
+}
+
+.submit-btn:hover {
     background-color: #d62839;
     transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Page-wide dark mode overrides */
+body.dark-mode {
+    background: #181818 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .sidebar {
+    background-color: #232323 !important;
+    color: #f7f7f7 !important;
+    border-right: 2px solid #2a2a2a !important;
+}
+
+body.dark-mode .main,
+body.dark-mode .content {
+    background: #232323 !important;
+    color: #e0e0e0 !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .heading {
+    color: #ff5576 !important;
+}
+
+body.dark-mode .addTask {
+    background: #2a2a2a !important;
+    color: #f7f7f7 !important;
+}
+
+body.dark-mode .addTask:hover {
+    background: #333 !important;
+}
+
+body.dark-mode .add-task-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .add-task-form {
+    background: #2a2a2a !important;
+    color: #f7f7f7 !important;
+}
+
+body.dark-mode .add-task-form input[type="text"],
+body.dark-mode .add-task-form textarea,
+body.dark-mode .add-task-form input[type="date"],
+body.dark-mode .add-task-form select {
+    background: #1e1e1e !important;
+    color: #fff !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .add-task-form input[type="text"]:focus,
+body.dark-mode .add-task-form textarea:focus,
+body.dark-mode .add-task-form input[type="date"]:focus,
+body.dark-mode .add-task-form select:focus {
+    border-color: #e63946 !important;
+    background-color: #252525 !important;
+}
+
+body.dark-mode .cancel-btn {
+    background: #3a3a3a !important;
+    color: #eee !important;
+}
+
+body.dark-mode .cancel-btn:hover {
+    background: #454545 !important;
+}
+
+body.dark-mode .task-options select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+body.dark-mode a {
+    color: #90caf9 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .task-options {
+        flex-direction: column;
+        gap: 12px;
+    }
 }

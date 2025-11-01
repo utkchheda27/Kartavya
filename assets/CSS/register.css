@@ -1,0 +1,73 @@
+/* Hide the default file input */
+input[type="file"] {
+    display: none;
+}
+
+/* Style the custom label to look like your other inputs */
+.custom-file-upload {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    color: #999;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.custom-file-upload:hover {
+    border-color: #062e3f;
+}
+
+.file-selected {
+    color: #062e3f;
+    font-weight: 500;
+}
+
+/* Hide default text when file is selected */
+.custom-file-upload.has-file .file-text {
+    display: none;
+}
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-25deg);
+    }
+
+    40% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(-25deg);
+    }
+
+    80% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}

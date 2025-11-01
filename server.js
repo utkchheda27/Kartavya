@@ -55,7 +55,7 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
-app.get("/logout", (req, res, next) => {
+app.post("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err); // Pass the error to the next middleware
@@ -100,12 +100,12 @@ app.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
-    successRedirect: "/",
+    successRedirect: "/inbox",
   })
 );
 
 app.get("/", (req, res) => {
-  res.render("home.ejs");
+  res.render("login.ejs");
 });
 
 app.get("/inbox", isAuthenticated, async (req, res, next) => {
